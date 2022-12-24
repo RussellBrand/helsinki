@@ -1,0 +1,9 @@
+node_modules
+/part0/junk/
+/part0/ages/
+.log/
+/part2/phonebook/non-ugly/build/
+/part4/an-exp/
+/part4/blo4.1/tmp-node_modules/
+/part4/blo4.15/tmp-app.js
+/part4/blo4.15/tests/old_user_test.helper.txt

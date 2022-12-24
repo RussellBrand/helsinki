@@ -1,0 +1,17 @@
+<- Browser sends POST request with the text of the new note
+-> Server sends REDIRECT
+
+<- Browsers GET for the main page
+-> Server sends main page
+
+<- Browsers GET for the css 
+-> Server sends the css
+
+<- Browsers GET for the JS script 
+-> Server sends JS script 
+
+<- Browsers GET for json data 
+-> Server sends json data
+
+<- Browsers GET for favicon
+-> Server sends favicon
