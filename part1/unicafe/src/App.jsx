@@ -5,7 +5,6 @@ const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
-  const howMany = good + bad + neutral;
 
   return (
     <div>
@@ -34,6 +33,29 @@ const App = () => {
         neutral
       </button>
 
+      <Stats good={good} bad={bad} neutral={neutral} />
+    </div>
+  );
+};
+
+export default App;
+
+const Stats = (props) => {
+  const { good, bad, neutral } = props;
+  const howMany = good + bad + neutral;
+
+  if (!howMany) {
+    return (
+      <>
+        {" "}
+        <h1> Stats </h1>
+        <p>No votes cast yet</p>
+      </>
+    );
+  }
+
+  return (
+    <>
       <h1> Stats </h1>
 
       <p> good: {good} </p>
@@ -42,13 +64,8 @@ const App = () => {
       <p> all: {howMany} </p>
       <p> average: {howMany ? (good - bad) / howMany : "no votes yet"} </p>
       <p>
-        {" "}
-        positive: {howMany
-          ? 100 * (good / howMany) + " %"
-          : "no votes yet"}{" "}
+        positive: {howMany ? 100 * (good / howMany) + " %" : "no votes yet"}
       </p>
-    </div>
+    </>
   );
 };
-
-export default App;
