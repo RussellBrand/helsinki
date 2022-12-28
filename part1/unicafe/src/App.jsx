@@ -9,29 +9,9 @@ const App = () => {
   return (
     <div>
       <h1> Give Feedback </h1>
-      <button
-        onClick={() => {
-          setGood((x) => x + 1);
-        }}
-      >
-        good
-      </button>
-
-      <button
-        onClick={() => {
-          setBad((x) => x + 1);
-        }}
-      >
-        bad
-      </button>
-
-      <button
-        onClick={() => {
-          setNeutral((x) => x + 1);
-        }}
-      >
-        neutral
-      </button>
+      <Button text="good" updater={setGood} />
+      <Button text="bad" updater={setBad} />
+      <Button text="neutral" updater={setNeutral} />
 
       <Stats good={good} bad={bad} neutral={neutral} />
     </div>
@@ -58,14 +38,40 @@ const Stats = (props) => {
     <>
       <h1> Stats </h1>
 
-      <p> good: {good} </p>
-      <p> bad: {bad} </p>
-      <p> neutral: {neutral} </p>
-      <p> all: {howMany} </p>
-      <p> average: {howMany ? (good - bad) / howMany : "no votes yet"} </p>
-      <p>
-        positive: {howMany ? 100 * (good / howMany) + " %" : "no votes yet"}
-      </p>
+      <StatisticLine text="good" value={good} />
+      <StatisticLine text="bad" value={bad} />
+      <StatisticLine text="neutral" value={neutral} />
+      <StatisticLine text="all" value={howMany} />
+      <StatisticLine
+        text="average"
+        value={howMany ? (good - bad) / howMany : "no votes yet"}
+      />
+      <StatisticLine
+        text="positive"
+        value={howMany ? 100 * (good / howMany) + " %" : "no votes yet"}
+      />
+    </>
+  );
+};
+
+const Button = (props) => {
+  const { text, updater } = props;
+  return (
+    <button
+      onClick={() => {
+        updater((x) => x + 1);
+      }}
+    >
+      {text}
+    </button>
+  );
+};
+
+const StatisticLine = (props) => {
+  const { text, value } = props;
+  return (
+    <>
+      <b> {text} :</b> {value} <br />
     </>
   );
 };
