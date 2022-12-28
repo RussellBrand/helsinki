@@ -38,18 +38,22 @@ const Stats = (props) => {
     <>
       <h1> Stats </h1>
 
-      <StatisticLine text="good" value={good} />
-      <StatisticLine text="bad" value={bad} />
-      <StatisticLine text="neutral" value={neutral} />
-      <StatisticLine text="all" value={howMany} />
-      <StatisticLine
-        text="average"
-        value={howMany ? (good - bad) / howMany : "no votes yet"}
-      />
-      <StatisticLine
-        text="positive"
-        value={howMany ? 100 * (good / howMany) + " %" : "no votes yet"}
-      />
+      <table>
+        <tbody>
+          <StatisticLine text="good" value={good} />
+          <StatisticLine text="bad" value={bad} />
+          <StatisticLine text="neutral" value={neutral} />
+          <StatisticLine text="all" value={howMany} />
+          <StatisticLine
+            text="average"
+            value={howMany ? (good - bad) / howMany : "no votes yet"}
+          />
+          <StatisticLine
+            text="positive"
+            value={howMany ? 100 * (good / howMany) + " %" : "no votes yet"}
+          />
+        </tbody>
+      </table>
     </>
   );
 };
@@ -70,8 +74,11 @@ const Button = (props) => {
 const StatisticLine = (props) => {
   const { text, value } = props;
   return (
-    <>
-      <b> {text} :</b> {value} <br />
-    </>
+    <tr>
+      <td>
+        <b>{text}</b>
+      </td>
+      <td>{value}</td>
+    </tr>
   );
 };
