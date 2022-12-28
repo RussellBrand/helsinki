@@ -5,6 +5,7 @@ const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
+  const howMany = good + bad + neutral;
 
   return (
     <div>
@@ -38,6 +39,14 @@ const App = () => {
       <p> good: {good} </p>
       <p> bad: {bad} </p>
       <p> neutral: {neutral} </p>
+      <p> all: {howMany} </p>
+      <p> average: {howMany ? (good - bad) / howMany : "no votes yet"} </p>
+      <p>
+        {" "}
+        positive: {howMany
+          ? 100 * (good / howMany) + " %"
+          : "no votes yet"}{" "}
+      </p>
     </div>
   );
 };
