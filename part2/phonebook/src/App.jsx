@@ -1,10 +1,7 @@
-// steps
-// [ ] control the text area
-// [ ] make the submit but not refresh the page
-// [ ] make the submit add
-// [ ] make the submit clear
-
 import { useState } from "react";
+import Filter from "./Filter.jsx";
+import AddPerson from "./AddPerson.jsx";
+import Numbers from "./Numbers.jsx";
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -48,46 +45,29 @@ const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
-      <h2>Filtering</h2>
-      <div>
-        Filter shown names staring with
-        <input value={filterString} onChange={handleFilterChange} />
-      </div>
 
-      <h2>Add person</h2>
-      <form onSubmit={addPerson}>
-        <div>
-          name: <input value={newName} onChange={handleNameChange} />
-        </div>
+      <Filter
+        filterString={filterString}
+        handleFilterChange={handleFilterChange}
+      />
 
-        <div>
-          number: <input value={newNumber} onChange={handleNumberChange} />
-        </div>
+      <AddPerson
+        addPerson={addPerson}
+        newName={newName}
+        handleNameChange={handleNameChange}
+        newNumber={newNumber}
+        handleNumberChange={handleNumberChange}
+      />
 
-        <div>
-          <button type="submit" disabled={newName.trim() === ""}>
-            add
-          </button>
-        </div>
-      </form>
+      {/* 
       <h2>debugging</h2>
       <pre>filterString={JSON.stringify(filterString)}</pre>
       <pre>newName={JSON.stringify(newName)}</pre>
       <pre>newNumber={JSON.stringify(newNumber)}</pre>
       <pre>persons={JSON.stringify(persons, null, 4)}</pre>
+*/}
 
-      <h2>Numbers</h2>
-      {persons
-        .filter(({ name }) =>
-          name.toLowerCase().startsWith(filterString.trim().toLowerCase())
-        )
-        .map(({ name, number }) => {
-          return (
-            <div key={name}>
-              {name} -- {number}{" "}
-            </div>
-          );
-        })}
+      <Numbers persons={persons} filterString={filterString} />
     </div>
   );
 };
