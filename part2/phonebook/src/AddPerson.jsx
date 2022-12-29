@@ -8,7 +8,6 @@ const AddPerson = (prop) => {
   } = prop;
   return (
     <div>
-      <h2>Add person</h2>
       <form onSubmit={addPerson}>
         <div>
           name: <input value={newName} onChange={handleNameChange} />

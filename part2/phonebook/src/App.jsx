@@ -46,10 +46,14 @@ const App = () => {
     <div>
       <h1>Phonebook</h1>
 
+      <h2>Filtering</h2>
+
       <Filter
         filterString={filterString}
         handleFilterChange={handleFilterChange}
       />
+
+      <h2>Add person</h2>
 
       <AddPerson
         addPerson={addPerson}
@@ -58,14 +62,7 @@ const App = () => {
         newNumber={newNumber}
         handleNumberChange={handleNumberChange}
       />
-
-      {/* 
-      <h2>debugging</h2>
-      <pre>filterString={JSON.stringify(filterString)}</pre>
-      <pre>newName={JSON.stringify(newName)}</pre>
-      <pre>newNumber={JSON.stringify(newNumber)}</pre>
-      <pre>persons={JSON.stringify(persons, null, 4)}</pre>
-*/}
+      <h2>Numbers</h2>
 
       <Numbers persons={persons} filterString={filterString} />
     </div>
