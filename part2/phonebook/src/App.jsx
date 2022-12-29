@@ -16,10 +16,17 @@ const App = () => {
 
   const addPerson = (event) => {
     event.preventDefault();
-    setPersons((pp) => [{ name: newName }, ...pp]);
-    setNewName("");
+    let trimName = newName.trim();
+    if (trimName === "") {
+      alert(`name cannot be blank`);
+    } else if (persons.find(({ name }) => name === trimName)) {
+      alert(`{name} is already in the phone book`);
+      return;
+    } else {
+      setPersons((pp) => [{ name: trimName }, ...pp]);
+      setNewName("");
+    }
   };
-
   return (
     <div>
       <h2>Phonebook</h2>
@@ -28,7 +35,9 @@ const App = () => {
           name: <input value={newName} onChange={handleNameChange} />
         </div>
         <div>
-          <button type="submit">add</button>
+          <button type="submit" disabled={newName.trim() === ""}>
+            add
+          </button>
         </div>
       </form>
       <h2>debugging</h2>
