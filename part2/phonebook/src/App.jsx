@@ -9,9 +9,14 @@ import { useState } from "react";
 const App = () => {
   const [persons, setPersons] = useState([{ name: "Arto Hellas" }]);
   const [newName, setNewName] = useState("");
+  const [newNumber, setNewNumber] = useState("");
 
   const handleNameChange = (event) => {
     setNewName(event.target.value);
+  };
+
+  const handleNumberChange = (event) => {
+    setNewNumber(event.target.value);
   };
 
   const addPerson = (event) => {
@@ -23,8 +28,9 @@ const App = () => {
       alert(`{name} is already in the phone book`);
       return;
     } else {
-      setPersons((pp) => [{ name: trimName }, ...pp]);
+      setPersons((pp) => [{ name: trimName, number: newNumber.trim() }, ...pp]);
       setNewName("");
+      setNewNumber("");
     }
   };
   return (
@@ -34,6 +40,11 @@ const App = () => {
         <div>
           name: <input value={newName} onChange={handleNameChange} />
         </div>
+
+        <div>
+          number: <input value={newNumber} onChange={handleNumberChange} />
+        </div>
+
         <div>
           <button type="submit" disabled={newName.trim() === ""}>
             add
@@ -41,12 +52,17 @@ const App = () => {
         </div>
       </form>
       <h2>debugging</h2>
-      <pre>newname={JSON.stringify(newName)}</pre>
+      <pre>newName={JSON.stringify(newName)}</pre>
+      <pre>newNumber={JSON.stringify(newNumber)}</pre>
       <pre>persons={JSON.stringify(persons, null, 4)}</pre>
 
       <h2>Numbers</h2>
-      {persons.map(({ name }) => {
-        return <div key={name}>{name} </div>;
+      {persons.map(({ name, number }) => {
+        return (
+          <div key={name}>
+            {name} -- {number}{" "}
+          </div>
+        );
       })}
     </div>
   );
