@@ -63,14 +63,41 @@ const Feedback = (props) => {
   if (countryCount > 1) {
     return (
       <div>
-        {countries.map((c) => {
-          const commonName = c?.name?.common;
-          return <div key={commonName}> {commonName}</div>;
+        {countries.map((country) => {
+          const commonName = country?.name?.common;
+          return <ACountry key={commonName} country={country} />;
         })}
       </div>
     );
   }
   return <PrettyCountry country={countries[0]} />;
+};
+
+const ACountry = (props) => {
+  const { country } = props;
+  const [showing, setShowing] = useState(false);
+
+  function toggleShowing() {
+    setShowing((xx) => {
+      return !xx;
+    });
+  }
+
+  // console.log(props);
+  const commonName = country?.name?.common;
+  return (
+    <div>
+      {commonName}
+      <button onClick={toggleShowing}>{showing ? "hide" : "show"}</button>
+      {showing ? (
+        <>
+          <PrettyCountry country={country} /> <br /> <br />
+        </>
+      ) : (
+        ""
+      )}
+    </div>
+  );
 };
 
 const PrettyCountry = (props) => {
