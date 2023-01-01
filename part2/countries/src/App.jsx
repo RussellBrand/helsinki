@@ -75,7 +75,7 @@ const Feedback = (props) => {
 
 const PrettyCountry = (props) => {
   const { country } = props;
-  const { capital, area, languages } = country;
+  const { capital, area, languages, flag } = country;
 
   return (
     <div>
@@ -91,6 +91,8 @@ const PrettyCountry = (props) => {
           return <li id={lan}>{lan} </li>;
         })}
       </ul>
+      <h2> Flag </h2>
+      <span style={{ fontSize: "200px" }}>{flag}</span>
     </div>
   );
 };
