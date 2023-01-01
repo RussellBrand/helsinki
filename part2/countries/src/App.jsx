@@ -154,7 +154,7 @@ const Weather = (prop) => {
         console.log({ error });
         setWeather({});
       });
-  }, []);
+  }, [weatherUrl]);
 
   return (
     <div>
