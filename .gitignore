@@ -7,3 +7,4 @@ node_modules
 /part4/blo4.1/tmp-node_modules/
 /part4/blo4.15/tmp-app.js
 /part4/blo4.15/tests/old_user_test.helper.txt
+/part2/countries/.env

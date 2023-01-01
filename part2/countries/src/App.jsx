@@ -4,6 +4,8 @@ import axios from "axios";
 const MAX_COUNTRIES = 10;
 const COUNTRIES_URL = "https://restcountries.com/v3.1";
 
+// const API_KEY = process.env.REACT_APP_API_KEY;
+
 const App = () => {
   const [searchString, setSearchString] = useState("");
   const [countries, setCountries] = useState([]);
@@ -17,7 +19,7 @@ const App = () => {
       axios
         .get(`${COUNTRIES_URL}/name/${trimmed}`)
         .then((response) => {
-          console.log("promise fulfilled");
+          console.log("COUNTRY promise fulfilled");
           setCountries(response.data);
         })
         .catch((error) => {
@@ -70,7 +72,7 @@ const Feedback = (props) => {
       </div>
     );
   }
-  return <PrettyCountry country={countries[0]} />;
+  return <PrettyCountry includeWeather={true} country={countries[0]} />;
 };
 
 const ACountry = (props) => {
@@ -102,7 +104,8 @@ const ACountry = (props) => {
 
 const PrettyCountry = (props) => {
   const { country } = props;
-  const { capital, area, languages, flag } = country;
+  const { includeWeather } = props;
+  const { capital, area, languages, flag, capitalInfo } = country;
 
   return (
     <div>
@@ -120,6 +123,44 @@ const PrettyCountry = (props) => {
       </ul>
       <h2> Flag </h2>
       <span style={{ fontSize: "200px" }}>{flag}</span>
+      {includeWeather ? (
+        <Weather capital={capital} capitalInfo={capitalInfo} />
+      ) : (
+        ""
+      )}
+    </div>
+  );
+};
+
+const Weather = (prop) => {
+  const [weather, setWeather] = useState({});
+  const { capital, capitalInfo } = prop;
+
+  const { latlng } = capitalInfo;
+  const [lat, lon] = latlng;
+
+  const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+
+  console.log({ weatherUrl });
+
+  useEffect(() => {
+    axios
+      .get(weatherUrl)
+      .then((response) => {
+        console.log("WEATHER promise fulfilled");
+        setWeather(response.data);
+      })
+      .catch((error) => {
+        console.log({ error });
+        setWeather({});
+      });
+  }, []);
+
+  return (
+    <div>
+      <h1>Weather in {capital}</h1>
+      <p>Temperature: {weather?.current_weather?.temperature} C </p>
+      <p>Wind: {weather?.current_weather?.windspeed} km/s </p>
     </div>
   );
 };
