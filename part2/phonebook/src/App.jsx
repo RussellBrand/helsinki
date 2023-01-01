@@ -60,22 +60,13 @@ const App = () => {
           number: newNumber,
         })
           .then((response) => {
-            console.log({ collisionResponse: response });
-            // wrong
-            const newPeople = persons.map((pp) =>
-              pp.id === collisionPerson.id ? response : pp
-            );
-            console.log({ newPeople });
-
-            setPersons(newPeople);
-
-            /*
-               setPersons((pp) =>
-               pp.map((aperson) =>
-               pp.id === collisionPerson.id ? response : pp
-               )
-               );
-	     */
+            // console.log({ collisionResponse: response });
+            setPersons((pp) => {
+              const newPeople = persons.map((pp) =>
+                pp.id === collisionPerson.id ? response : pp
+              );
+              return newPeople;
+            });
           })
           .catch((error) => {
             console.log({ error, newPerson });
