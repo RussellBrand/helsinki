@@ -5,6 +5,8 @@ import Filter from "./Filter.jsx";
 import AddPerson from "./AddPerson.jsx";
 import Numbers from "./Numbers.jsx";
 
+import Persons from "./services/persons.js";
+
 const App = () => {
   const [persons, setPersons] = useState([]);
 
@@ -47,7 +49,16 @@ const App = () => {
       alert(`{name} is already in the phone book`);
       return;
     } else {
-      setPersons((pp) => [{ name: trimName, number: newNumber.trim() }, ...pp]);
+      const newPerson = { name: trimName, number: newNumber.trim() };
+      Persons.create(newPerson)
+        .then((response) => {
+          // console.log({ response });
+          setPersons((pp) => [response, ...pp]);
+        })
+        .catch((error) => {
+          console.log({ error, newPerson });
+          alert(`failed to add ${newPerson}`);
+        });
       setNewName("");
       setNewNumber("");
     }
