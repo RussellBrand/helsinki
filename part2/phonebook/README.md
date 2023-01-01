@@ -1,13 +1,13 @@
 # Phone book
-## [x]2.15: Phonebook step7
+## [x] 2.15: Phonebook step7
 put new person is a variable
 send to server
 append locally
 
-## [ ]2.16: Phonebook step8
+## [x] 2.16: Phonebook step8
 Extract the code that handles the communication with the backend into its own module by following the example shown earlier in this part of the course material.
 
-## [ ]2.17: Phonebook step9
+## [ ] 2.17: Phonebook step9
 Make it possible for users to delete entries from the phonebook. The deletion can be done through a dedicated button for each person in the phonebook list. You can confirm the action from the user by using the window.confirm method:
 
 2.17 window confirm feature screenshot
@@ -21,7 +21,7 @@ NB: You can't use the name delete for a variable because it's a reserved word in
 const delete = (id) => {
   // ...
 }
-## [ ]2.18*: Phonebook step10
+## [ ] 2.18*: Phonebook step10
 Change the functionality so that if a number is added to an already existing user, the new number will replace the old number. It's recommended to use the HTTP PUT method for updating the phone number.
 
 If the person's information is already in the phonebook, the application can confirm the action from the user:

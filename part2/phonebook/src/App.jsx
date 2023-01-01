@@ -12,14 +12,13 @@ const App = () => {
 
   useEffect(() => {
     console.log("effect");
-    axios
-      .get("http://localhost:3001/persons")
+    Persons.getAll()
       .then((response) => {
-        console.log("promise fulfilled");
-        setPersons(response.data);
+        console.log("PERSONS promise fulfilled");
+        setPersons(response);
       })
       .catch((error) => {
-        console.log(`Effect Problem{error}`);
+        console.log(`PERSONS Effect Problem ${error}`);
       });
   }, []);
 
