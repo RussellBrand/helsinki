@@ -45,12 +45,43 @@ const App = () => {
 
   const addPerson = (event) => {
     event.preventDefault();
-    let trimName = newName.trim();
+    const trimName = newName.trim();
+    const collisionPerson = persons.find(({ name }) => name === trimName);
+
     if (trimName === "") {
       alert(`name cannot be blank`);
-    } else if (persons.find(({ name }) => name === trimName)) {
-      alert(`{name} is already in the phone book`);
-      return;
+    } else if (collisionPerson) {
+      if (!window.confirm(`${trimName} already in phonebook -- Update? `)) {
+        return;
+      } else {
+        const newPerson = 100;
+        Persons.update(collisionPerson.id, {
+          ...collisionPerson,
+          number: newNumber,
+        })
+          .then((response) => {
+            console.log({ collisionResponse: response });
+            // wrong
+            const newPeople = persons.map((pp) =>
+              pp.id === collisionPerson.id ? response : pp
+            );
+            console.log({ newPeople });
+
+            setPersons(newPeople);
+
+            /*
+               setPersons((pp) =>
+               pp.map((aperson) =>
+               pp.id === collisionPerson.id ? response : pp
+               )
+               );
+	     */
+          })
+          .catch((error) => {
+            console.log({ error, newPerson });
+            alert(`failed to add ${newPerson}`);
+          });
+      } // FOUND PERSON
     } else {
       const newPerson = { name: trimName, number: newNumber.trim() };
       Persons.create(newPerson)

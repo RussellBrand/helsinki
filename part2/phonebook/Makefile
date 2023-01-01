@@ -6,3 +6,6 @@ tar:
 
 server:
 	npm run server
+
+routes:
+	npm run routes
