@@ -62,10 +62,9 @@ const App = () => {
           .then((response) => {
             // console.log({ collisionResponse: response });
             setPersons((pp) => {
-              const newPeople = persons.map((pp) =>
+              return persons.map((pp) =>
                 pp.id === collisionPerson.id ? response : pp
               );
-              return newPeople;
             });
           })
           .catch((error) => {
