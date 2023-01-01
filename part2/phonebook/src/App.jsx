@@ -10,6 +10,10 @@ import Persons from "./services/persons.js";
 const App = () => {
   const [persons, setPersons] = useState([]);
 
+  const localDelete = (theId) => {
+    setPersons((p) => p.filter(({ id }) => theId !== id));
+  };
+
   useEffect(() => {
     console.log("effect");
     Persons.getAll()
@@ -84,7 +88,11 @@ const App = () => {
       />
       <h2>Numbers</h2>
 
-      <Numbers persons={persons} filterString={filterString} />
+      <Numbers
+        localDelete={localDelete}
+        persons={persons}
+        filterString={filterString}
+      />
     </div>
   );
 };

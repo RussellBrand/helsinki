@@ -7,7 +7,14 @@ append locally
 ## [x] 2.16: Phonebook step8
 Extract the code that handles the communication with the backend into its own module by following the example shown earlier in this part of the course material.
 
-## [ ] 2.17: Phonebook step9
+## [x] 2.17: Phonebook step9
+### [x] add the delete button
+### [x] enable the delete button
+### [x] make querry
+### [x] update local 
+### [x] add alert
+### instructions
+
 Make it possible for users to delete entries from the phonebook. The deletion can be done through a dedicated button for each person in the phonebook list. You can confirm the action from the user by using the window.confirm method:
 
 2.17 window confirm feature screenshot
