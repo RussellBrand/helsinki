@@ -61,11 +61,11 @@ const App = () => {
         })
           .then((response) => {
             // console.log({ collisionResponse: response });
-            setPersons((pp) => {
-              return persons.map((pp) =>
+            setPersons((pp) =>
+              persons.map((pp) =>
                 pp.id === collisionPerson.id ? response : pp
-              );
-            });
+              )
+            );
           })
           .catch((error) => {
             console.log({ error, newPerson });
@@ -83,9 +83,9 @@ const App = () => {
           console.log({ error, newPerson });
           alert(`failed to add ${newPerson}`);
         });
-      setNewName("");
-      setNewNumber("");
     }
+    setNewName("");
+    setNewNumber("");
   };
   return (
     <div>

@@ -3,14 +3,14 @@ import Persons from "./services/persons.js";
 const Numbers = (props) => {
   const { persons, filterString, localDelete } = props;
 
-  console.log({ NumbersPersons: persons });
+  // console.log({ NumbersPersons: persons });
 
   return (
     <div>
       {persons
         .filter((thisPerson) => {
           const { name } = thisPerson;
-          console.log({ thisPerson, filterString });
+          // console.log({ thisPerson, filterString });
           return name
             .toLowerCase()
             .startsWith(filterString.trim().toLowerCase());
