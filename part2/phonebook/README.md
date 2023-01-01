@@ -28,7 +28,7 @@ NB: You can't use the name delete for a variable because it's a reserved word in
 const delete = (id) => {
   // ...
 }
-## [ ] 2.18*: Phonebook step10
+## [x] 2.18*: Phonebook step10
 ### [ ] compare
 ### [ ] ask
 ### [ ] send update
@@ -38,3 +38,10 @@ Change the functionality so that if a number is added to an already existing use
 
 If the person's information is already in the phonebook, the application can confirm the action from the user:
 
+
+
+## [ ] alert message
+### [x] duplicative delete
+### [x] modify after delete
+### [ ] short duration messages delete
+### [ ] same size box ??

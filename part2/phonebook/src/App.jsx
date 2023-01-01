@@ -4,11 +4,33 @@ import axios from "axios";
 import Filter from "./Filter.jsx";
 import AddPerson from "./AddPerson.jsx";
 import Numbers from "./Numbers.jsx";
-
 import Persons from "./services/persons.js";
 
+import AlertBox from "./AlertBox.jsx";
+
+const ALERT_TIME = 2000;
+
 const App = () => {
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertKind, setAlertKind] = useState("success");
   const [persons, setPersons] = useState([]);
+
+  function specifyAlert(message, kind) {
+    console.log("specifyAlert", message, kind);
+    setAlertMessage(message);
+    setAlertKind(kind);
+    setTimeout(() => {
+      setAlertMessage("");
+    }, ALERT_TIME);
+  }
+
+  function announceError(message) {
+    specifyAlert(message, "error");
+  }
+
+  function announceSuccess(message) {
+    specifyAlert(message, "success");
+  }
 
   const localDelete = (theId) => {
     setPersons((p) => p.filter(({ id }) => theId !== id));
@@ -54,7 +76,6 @@ const App = () => {
       if (!window.confirm(`${trimName} already in phonebook -- Update? `)) {
         return;
       } else {
-        const newPerson = 100;
         Persons.update(collisionPerson.id, {
           ...collisionPerson,
           number: newNumber,
@@ -66,10 +87,13 @@ const App = () => {
                 pp.id === collisionPerson.id ? response : pp
               )
             );
+            announceSuccess(
+              `${collisionPerson.name}(${collisionPerson.id}) updated`
+            );
           })
           .catch((error) => {
-            console.log({ error, newPerson });
-            alert(`failed to add ${newPerson}`);
+            console.log(`failed to update ${trimName}`, error);
+            announceError(`failed to update ${trimName}`);
           });
       } // FOUND PERSON
     } else {
@@ -78,10 +102,11 @@ const App = () => {
         .then((response) => {
           // console.log({ response });
           setPersons((pp) => [response, ...pp]);
+          announceSuccess(`${response.name}(${response.id}) created`);
         })
         .catch((error) => {
           console.log({ error, newPerson });
-          alert(`failed to add ${newPerson}`);
+          announceError(`failed to add ${newPerson}`);
         });
     }
     setNewName("");
@@ -90,6 +115,12 @@ const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
+
+      <AlertBox
+        alertMessage={alertMessage}
+        alertKind={alertKind}
+        setAlertMessage={setAlertMessage}
+      />
 
       <h2>Filtering</h2>
 
@@ -111,6 +142,8 @@ const App = () => {
 
       <Numbers
         localDelete={localDelete}
+        announceError={announceError}
+        announceSuccess={announceSuccess}
         persons={persons}
         filterString={filterString}
       />

@@ -1,7 +1,8 @@
 import Persons from "./services/persons.js";
 
 const Numbers = (props) => {
-  const { persons, filterString, localDelete } = props;
+  const { persons, filterString, localDelete, announceError, announceSuccess } =
+    props;
 
   // console.log({ NumbersPersons: persons });
 
@@ -18,7 +19,13 @@ const Numbers = (props) => {
         .map((person) => {
           const { name } = person;
           return (
-            <APerson key={name} localDelete={localDelete} person={person} />
+            <APerson
+              key={name}
+              localDelete={localDelete}
+              announceError={announceError}
+              announceSuccess={announceSuccess}
+              person={person}
+            />
           );
         })}
     </div>
@@ -28,7 +35,7 @@ const Numbers = (props) => {
 export default Numbers;
 
 const APerson = (props) => {
-  const { person, localDelete } = props;
+  const { person, localDelete, announceError, announceSuccess } = props;
   const { id, number, name } = person;
 
   const personDeleteClick = () => {
@@ -39,9 +46,11 @@ const APerson = (props) => {
     Persons.remove(id)
       .then((x) => {
         localDelete(id);
+        announceSuccess(`Deleted ${name} (${id})`);
       })
       .catch((error) => {
-        alert(`failed to delete ${id} -- ${error}`);
+        announceError(`failed to delete ${name} (${id})`);
+        console.log(`failed to delete ${name} (${id})`, error);
       });
   };
 
