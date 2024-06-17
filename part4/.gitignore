@@ -1,0 +1,7 @@
+/node_modules/
+/tmp/
+/old-package.json
+/saved/package-lock.json.Z
+/saved/package.json.Z
+/data/
+
